@@ -82,4 +82,54 @@ public class CategoryRepository : ICategoryRepository
 
         await connection.ExecuteAsync(query, new { id });
     }
+
+    public async Task<Category> GetCategoryByProductsMultipleResultsAsync(int id)
+    {
+        var query = @"SELECT Id, Name 
+                    FROM Categories 
+                    WHERE Id = @Id;
+                    
+                    SELECT Id, Name, ModelYear, Price, BrandId, CategoryId
+                    FROM Products 
+                    WHERE CategoryId = @Id;";
+
+        using var connection = _context.CreateConnection();
+
+        using var multi = await connection.QueryMultipleAsync(query, new { id });
+
+        var category = await multi.ReadSingleOrDefaultAsync<Category>();
+        if (category != null)
+            category.Products = (await multi.ReadAsync<Product>()).ToList();
+
+        return category;
+    }
+
+    public async Task<List<Category>> GetCategoryByProductsMultipleMappingAsync()
+    {
+        var query = @"SELECT cat.Id, cat.Name,
+                    pr.Id, pr.Name, ModelYear, Price, BrandId, CategoryId
+                    FROM Categories cat
+                    JOIN Products pr
+                    ON cat.Id = pr.CategoryId";
+
+        using var connection = _context.CreateConnection();
+
+        var categoryDic = new Dictionary<int, Category>();
+        var categories = await connection.QueryAsync<Category, Product, Category>(
+            query,
+            (category, product) =>
+            {
+                if (!categoryDic.TryGetValue(category.Id, out var currentCategory))
+                {
+                    currentCategory = category;
+                    categoryDic.Add(currentCategory.Id, currentCategory);
+                }
+
+                currentCategory.Products.Add(product);
+                return currentCategory;
+            }
+        );
+
+        return categories.Distinct().ToList();
+    }
 }

@@ -8,4 +8,6 @@ public interface ICategoryRepository
     Task<Category> CreateCategoryAsync(Category category);
     Task UpdateCategoryAsync(int id, Category category);
     Task DeleteCategoryAsync(int id);
+    Task<Category> GetCategoryByProductsMultipleResultsAsync(int id);
+    Task<List<Category>> GetCategoryByProductsMultipleMappingAsync();
 }

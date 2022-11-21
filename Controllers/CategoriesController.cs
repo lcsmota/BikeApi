@@ -49,6 +49,38 @@ public class CategoriesController : ControllerBase
         }
     }
 
+    [HttpGet("{id}/multipleresults")]
+    public async Task<IActionResult> GetCategoryByProductsMultipleResultsAsync(int id)
+    {
+        try
+        {
+            var category = await _prodRepository.GetCategoryByProductsMultipleResultsAsync(id);
+
+            if (category is null) return NotFound("Categories not found.");
+
+            return Ok(category);
+        }
+        catch (System.Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpGet("multiplemapping")]
+    public async Task<IActionResult> GetCategoryByProductsMultipleMappingAsync()
+    {
+        try
+        {
+            var category = await _prodRepository.GetCategoryByProductsMultipleMappingAsync();
+
+            return Ok(category);
+        }
+        catch (System.Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateCategoryAsync(Category category)
     {
