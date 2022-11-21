@@ -82,4 +82,57 @@ public class BrandRepository : IBrandRepository
 
         await connection.ExecuteAsync(query, new { id });
     }
+
+    public async Task<Brand> GetBrandByProductsMultipleResultsAsync(int id)
+    {
+        var query = @"SELECT Id, Name
+                    FROM Brands
+                    WHERE Id = @Id;
+                    
+                    SELECT Id, Name, ModelYear, Price, BrandId, CategoryId
+                    FROM Products 
+                    WHERE BrandId = @Id;";
+
+        using var connection = _context.CreateConnection();
+
+        using var multi = await connection.QueryMultipleAsync(query, new { id });
+
+        var brand = await multi.ReadSingleOrDefaultAsync<Brand>();
+        if (brand != null)
+            brand.Products = (await multi.ReadAsync<Product>()).ToList();
+
+        return brand;
+    }
+
+    public async Task<List<Brand>> GetBrandByProductsMultipleMappingAsync()
+    {
+        var query = @"SELECT br.Id, br.Name,
+                    pr.Id, pr.Name, ModelYear, Price, BrandId, CategoryId
+                    FROM Brands br
+                    JOIN Products pr
+                    ON br.Id = pr.BrandId";
+
+        using var connection = _context.CreateConnection();
+
+        var brands = new List<Brand>();
+        var items = await connection.QueryAsync<Brand, Product, Brand>(
+            query,
+            (brand, product) =>
+            {
+                var br = brands.FirstOrDefault(x => x.Id == brand.Id);
+                if (br is null)
+                {
+                    br = brand;
+                    br.Products.Add(product);
+                    brands.Add(br);
+                }
+                else
+                    br.Products.Add(product);
+
+                return brand;
+            }
+        );
+
+        return items.ToList();
+    }
 }

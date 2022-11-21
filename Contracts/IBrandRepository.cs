@@ -8,4 +8,6 @@ public interface IBrandRepository
     Task<Brand> CreateBrandAsync(Brand brand);
     Task UpdateBrandAsync(int id, Brand brand);
     Task DeleteBrandAsync(int id);
+    Task<Brand> GetBrandByProductsMultipleResultsAsync(int id);
+    Task<List<Brand>> GetBrandByProductsMultipleMappingAsync();
 }

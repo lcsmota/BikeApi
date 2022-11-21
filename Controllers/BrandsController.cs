@@ -49,6 +49,38 @@ public class BrandsController : ControllerBase
         }
     }
 
+    [HttpGet("{id}/multipleresults")]
+    public async Task<IActionResult> GetBrandByProductsMultipleResultsAsync(int id)
+    {
+        try
+        {
+            var brand = await _prodRepository.GetBrandByProductsMultipleResultsAsync(id);
+
+            if (brand is null) return NotFound("Brands not found.");
+
+            return Ok(brand);
+        }
+        catch (System.Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
+    [HttpGet("multiplemapping")]
+    public async Task<IActionResult> GetBrandByProductsMultipleMappingAsync()
+    {
+        try
+        {
+            var brand = await _prodRepository.GetBrandByProductsMultipleMappingAsync();
+
+            return Ok(brand);
+        }
+        catch (System.Exception ex)
+        {
+            return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+        }
+    }
+
     [HttpPost]
     public async Task<IActionResult> CreateBrandAsync(Brand brand)
     {
