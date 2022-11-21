@@ -1,0 +1,33 @@
+CREATE DATABASE BikeApiDapper
+GO
+
+Use BikeApiDapper
+GO
+
+CREATE TABLE Categories(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Name VARCHAR(80) NOT NULL
+);
+GO
+
+CREATE TABLE Brands(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Name VARCHAR(80) NOT NULL
+);
+GO
+
+CREATE TABLE Products(
+	Id INT PRIMARY KEY IDENTITY(1, 1),
+	Name VARCHAR(80) NOT NULL,
+	ModelYear SMALLINT NOT NULL,
+	Price DECIMAL(10, 2) NOT NULL,
+	BrandId INT NOT NULL,
+	CategoryId INT NOT NULL,
+	
+	CONSTRAINT [FK_Products_Category] FOREIGN KEY (CategoryId) 
+        REFERENCES Categories(Id),
+
+	CONSTRAINT [FK_Products_Brand]FOREIGN KEY (BrandId) 
+        REFERENCES Brands(Id)
+);
+GO
