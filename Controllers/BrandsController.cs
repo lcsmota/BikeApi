@@ -32,7 +32,7 @@ public class BrandsController : ControllerBase
         }
     }
 
-    [HttpGet("{id}", Name = "GetById")]
+    [HttpGet("{id}", Name = "GetBrandById")]
     public async Task<IActionResult> GetBrandAsync(int id)
     {
         try
@@ -56,7 +56,7 @@ public class BrandsController : ControllerBase
         {
             var createdBrand = await _prodRepository.CreateBrandAsync(brand);
 
-            return CreatedAtRoute("GetById", new { id = createdBrand.Id }, createdBrand);
+            return CreatedAtRoute("GetBrandById", new { id = createdBrand.Id }, createdBrand);
         }
         catch (System.Exception ex)
         {

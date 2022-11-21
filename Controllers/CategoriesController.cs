@@ -32,7 +32,7 @@ public class CategoriesController : ControllerBase
         }
     }
 
-    [HttpGet("{id}", Name = "GetById")]
+    [HttpGet("{id}", Name = "GetCategoryById")]
     public async Task<IActionResult> GetCategoryAsync(int id)
     {
         try
@@ -56,7 +56,7 @@ public class CategoriesController : ControllerBase
         {
             var createdCategory = await _prodRepository.CreateCategoryAsync(category);
 
-            return CreatedAtRoute("GetById", new { id = createdCategory.Id }, createdCategory);
+            return CreatedAtRoute("GetCategoryById", new { id = createdCategory.Id }, createdCategory);
         }
         catch (System.Exception ex)
         {
