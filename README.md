@@ -14,13 +14,13 @@
 
 `$ git clone https://github.com/lcsmota/BikeApi.git`
 
-`$ cd BikeApi`
+`$ cd BikeApi/`
 
 `$ dotnet restore`
 
 `$ dotnet run`
 
-**Server listenning at  [https://localhost:7250/](https://localhost:7250/)**
+**Server listenning at  [https://localhost:7250/swagger](https://localhost:7250/swagger)**
 #
 ## 🔨 Tools used
 
