@@ -61,6 +61,20 @@ CREATE TABLE Products(
 GO
 ```
 
+### Relationships
+```
++--------------+        +-------------+        +--------------+
+|   Categories | 1    * |    Products | *    1 |     Brands   |
++--------------+        +-------------+        +--------------+
+|     Id       |<-------|      Id     |------->|      Id      |
+|     Name     |        |     Name    |        |     Name     |
+|              |        |  ModelYear  |        |              |
+|              |        |    Price    |        |              |
++--------------+        |  BrandId    |        +--------------+
+                        | CategoryId  |
+                        +-------------+
+```
+
 #
 ## 🔧 Installation
 
