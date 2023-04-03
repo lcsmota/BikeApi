@@ -86,7 +86,7 @@ GO
 
 `$ dotnet run`
 
-**Server listenning at  [https://localhost:7250/swagger](https://localhost:7250/swagger) or [https://localhost:7250/api/v1/Products](https://localhost:7250/api/v1/Products)**
+**Server listenning at  [https://localhost:7250/swagger](https://localhost:7250/swagger) or [https://localhost:7250/api/v1/Products](https://localhost:7250/api/v1/Products), [https://localhost:7250/api/v1/Brands](https://localhost:7250/api/v1/Brands) and [https://localhost:7250/api/v1/Categories](https://localhost:7250/api/v1/Categories)**
 #
 
 # 📫  Routes for Products
@@ -212,7 +212,7 @@ GO
 <img src="https://user-images.githubusercontent.com/118696036/228880252-9fe960a3-4f83-452c-9110-9ae012bae320.png" />
 
 #
-#### Delete an object (Bike)
+### Delete an object (Bike)
 ```http
   DELETE https://localhost:7250/api/v1/Products/${id}
 ```
@@ -396,7 +396,7 @@ GO
 <img src="https://user-images.githubusercontent.com/118696036/228933891-75b8a903-4cc7-4153-a1b3-79f4e90a3d5e.png" />
 
 #
-#### Delete an object (Category)
+### Delete an object (Category)
 ```http
   DELETE https://localhost:7250/api/v1/Categories/${id}
 ```
@@ -581,7 +581,7 @@ GO
 <img src="https://user-images.githubusercontent.com/118696036/228942175-48b83873-1f7b-414e-9dd5-8d625f019969.png" />
 
 #
-#### Delete an object (Brand)
+### Delete an object (Brand)
 ```http
   DELETE https://localhost:7250/api/v1/Brands/${id}
 ```
