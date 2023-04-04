@@ -25,7 +25,7 @@
 
 _Create a database in SQLServer that contains the table created from the following script:_
 
-```
+```sql
 CREATE DATABASE BikeApiDapper
 GO
 
@@ -62,7 +62,7 @@ GO
 ```
 
 ### Relationships
-```
+```yaml
 +--------------+        +-------------+        +--------------+
 |   Categories | 1    * |    Products | *    1 |     Brands   |
 +--------------+        +-------------+        +--------------+
