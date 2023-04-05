@@ -142,7 +142,7 @@ GO
   POST https://localhost:7250/api/v1/Products
 ```
 📨  **body:**
-```
+```json
 {
   "name": "Trek 820",
   "modelYear": 2016,
@@ -153,7 +153,7 @@ GO
 ```
 
 🧾  **response:**
-```
+```json
 {
    "modelYear": 2016,
     "price": 379.99,
@@ -188,7 +188,7 @@ GO
 | `id`      | `int` | **Mandatory**. The ID of the object you want to update|
 
 📨  **body:**
-```
+```json
 {
   "name": "Trek 820",
   "price": 399.50
@@ -334,14 +334,14 @@ GO
   POST https://localhost:7250/api/v1/Categories
 ```
 📨  **body:**
-```
+```json
 {
     "name": "Children Bicycles"
 }
 ```
 
 🧾  **response:**
-```
+```json
 {
     "products": [],
     "id": 9,
@@ -373,7 +373,7 @@ GO
 | `id`      | `int` | **Mandatory**. The ID of the object you want to update|
 
 📨  **body:**
-```
+```json
 {
     "name": "Cyclocross Bicycles"
 }
@@ -519,14 +519,14 @@ GO
   POST https://localhost:7250/api/v1/Brands
 ```
 📨  **body:**
-```
+```json
 {
     "name": "Trek"
 }
 ```
 
 🧾  **response:**
-```
+```json
 {
     "products": [],
     "id": 11,
@@ -558,7 +558,7 @@ GO
 | `id`      | `int` | **Mandatory**. The ID of the object you want to update|
 
 📨  **body:**
-```
+```json
 {
     "name": "Sun Bicycles"
 }
